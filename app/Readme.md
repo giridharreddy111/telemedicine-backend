@@ -1,64 +1,59 @@
-# Telemedicine Backend - FastAPI
+# Telemedicine Backend – FastAPI
 
-## Tech Stack
+A production-style Telemedicine backend built using FastAPI and SQLAlchemy.
+
+This backend system supports:
+
+- Role-based authentication (Doctor / Patient)
+- Doctor slot creation
+- Patient slot booking (Idempotent)
+- Consultation creation
+- Prescription generation
+- JWT authentication
+- Logging and health monitoring
+- Dockerized deployment
+
+---
+
+## 🚀 Tech Stack
+
 - FastAPI
-- SQLAlchemy
-- SQLite
+- SQLAlchemy ORM
+- SQLite (Development)
 - JWT Authentication
+- Uvicorn
 - Docker
+- Python 3.11+
 
 ---
 
-## Features
-- User Registration (Doctor / Patient)
-- JWT Login
-- Role-based access control
-- Doctor can create slots
-- Patient can book slots
-- Doctor can create consultations
-- Doctor can create prescriptions
-- Audit logging
+## 📌 Core API Flow
+
+1. Register Doctor
+2. Register Patient
+3. Login Doctor
+4. Create Slot
+5. Login Patient
+6. Book Slot (Idempotent)
+7. Login Doctor
+8. Create Consultation
+9. Create Prescription
 
 ---
 
-## Setup Instructions
+## 🔐 Role-Based Access Control
 
-### 1. Create virtual environment
-python -m venv venv
+| Endpoint | Role Required |
+|----------|--------------|
+| Create Slot | DOCTOR |
+| Book Slot | PATIENT |
+| Create Consultation | DOCTOR |
+| Create Prescription | DOCTOR |
 
-### 2. Activate
-venv\Scripts\activate
+---
 
-### 3. Install dependencies
+## 🧪 Run Locally
+
+```bash
 pip install -r requirements.txt
-
-### 4. Run server
 uvicorn app.main:app --reload
-
-OpenAPI available at:
-http://localhost:8000/docs
-
-
----
-
-## Docker Setup
-
-Build image:
-docker build -t telemedicine-app .
-
-Run container:
-docker run -p 8000:8000 telemedicine-app
-
----
-
-## API Flow
-
-1. Register doctor
-2. Register patient
-3. Login doctor
-4. Create slot
-5. Login patient
-6. Book slot
-7. Login doctor
-8. Create consultation
-9. Create prescription
